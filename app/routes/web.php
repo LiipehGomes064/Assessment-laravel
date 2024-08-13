@@ -12,9 +12,11 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\UserinfoController;
 use App\Http\Controllers\EventsController;
 
-
 //events page
-Route::get('/events',[EventsController::class,'index'])->name('events');
+Route::get('/events', [EventsController::class, 'index'])->name('events');
+Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event}', [EventsController::class, 'update'])->name('events.update');
+Route::delete('/events/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
 
 //Pagina de ABout Us
 Route::get('/aboutus',[AboutusController::class,'index'])->name('aboutus');

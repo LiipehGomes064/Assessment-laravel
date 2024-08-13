@@ -11,9 +11,14 @@
                         <h5 class="card-title">{{ $event->event_name }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $event->event_date->format('d/m/Y') }}</h6>
                         <p class="card-text">{{ $event->event_description }}</p>
-                        <a href="#" class="btn btn-primary">Saiba mais</a>
-                        <a href="#" class="btn btn-secondary">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        @if (Auth::check() && Auth::user()->usertype == 1)
+                        <a href="{{ route('events.edit', $event) }}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ route('events.destroy', $event) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este evento?')">Delete</button>
+                        </form>
+                        @endif
                     </div>
                 </div>
             </div>

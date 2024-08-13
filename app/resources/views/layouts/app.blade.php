@@ -31,7 +31,7 @@
                 <a href="{{asset('dashboard')}}" class="text-white mx-2">Dashboard</a>
                 <a href="{{ route('users.create.form') }}" class="text-white mx-2">Create User</a>
                 <a href="{{ route('aboutus') }}" class="text-white mx-2">About Us</a>
-                <a href="{{ route('aboutus') }}" class="text-white mx-2">Events</a>
+                <a href="{{ route('events') }}" class="text-white mx-2">Events</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>

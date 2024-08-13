@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             DB::table('users')->insert([
                 'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password'), // Defina uma senha padrão ou gere uma senha aleatória
+                'password' => Hash::make('password'),
                 'age' => $faker->numberBetween(18, 80),
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
