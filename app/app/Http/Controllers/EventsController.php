@@ -8,6 +8,40 @@ use Carbon\Carbon;
 
 class EventsController extends Controller
 {
+    public function create()
+    {
+        return view('events.create');
+    }
+
+    // Método para salvar o novo evento no banco de dados
+    public function store(Request $request)
+    {
+        // Validação básica dos dados
+        $validatedData = $request->validate([
+            'event_name' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'event_description' => 'nullable|string',
+            'event_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Criação do evento
+        $event = new Event();
+        $event->event_name = $validatedData['event_name'];
+        $event->event_date = $validatedData['event_date'];
+        $event->event_description = $validatedData['event_description'];
+
+        // Salvar a imagem do evento (se houver)
+        if ($request->hasFile('event_image')) {
+            $imageName = time().'.'.$request->event_image->extension();  
+            $request->event_image->move(public_path('images'), $imageName);
+            $event->event_image = 'images/'.$imageName;
+        }
+
+        $event->save();
+
+        return redirect()->route('events.index')->with('success', 'Evento criado com sucesso!');
+    }
+
     public function index()
     {
         $events = Event::all();

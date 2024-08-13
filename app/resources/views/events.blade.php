@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Auth::check() && Auth::user()->usertype == 1)
+<div class="container">
+    <a href="{{ route('events.create') }}" class="btn btn-primary">Create a new event</a>
+</div>
+@endif
 <div class="container mt-5">
     <div class="row">
         @foreach ($events as $event)
@@ -16,7 +21,7 @@
                         <form action="{{ route('events.destroy', $event) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este evento?')">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure that you want to delete it?')">Delete</button>
                         </form>
                         @endif
                     </div>
@@ -26,3 +31,4 @@
     </div>
 </div>
 @endsection
+

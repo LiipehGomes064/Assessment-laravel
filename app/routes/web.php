@@ -17,6 +17,9 @@ Route::get('/events', [EventsController::class, 'index'])->name('events');
 Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit');
 Route::put('/events/{event}', [EventsController::class, 'update'])->name('events.update');
 Route::delete('/events/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
+Route::get('/events/create', [EventsController::class, 'create'])->name('events.create');
+Route::post('/events', [EventsController::class, 'store'])->name('events.store');
+
 
 //Pagina de ABout Us
 Route::get('/aboutus',[AboutusController::class,'index'])->name('aboutus');

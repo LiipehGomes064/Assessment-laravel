@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="EN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,17 +19,19 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-<header class="bg-primary text-white p-3">
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-primary text-white p-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="dashboard"><img src="LOGO" alt="Logo" style="height: 50px;"></a>
+            <a href="dashboard"><img src="{{asset('logo.png')}}" alt="Logo" style="height: 50px;"></a>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
             </form>
             <nav>
                 <a href="{{asset('dashboard')}}" class="text-white mx-2">Dashboard</a>
+                @if (Auth::check() && Auth::user()->usertype == 1 )
                 <a href="{{ route('users.create.form') }}" class="text-white mx-2">Create User</a>
+                @endif
                 <a href="{{ route('aboutus') }}" class="text-white mx-2">About Us</a>
                 <a href="{{ route('events') }}" class="text-white mx-2">Events</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -43,13 +45,12 @@
         </div>
     </header>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="flex-fill py-4">
+        @yield('content')
+    </main>
 
-    <footer class="bg-dark text-white text-center p-3">
-        &copy; 2024 Desined by Luis Filipe Gomes ©. All rights reserved.
+    <footer class="bg-primary text-center py-3 mt-auto">
+        <p>&copy; {{ date('Y') }} Designed by Luis Filipe Gomes. All rights reserved.</p>
     </footer>
 
     <!-- Bootstrap JS -->
