@@ -11,7 +11,7 @@
     <div class="bg">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">Login</div>
                         <div class="card-body">
@@ -40,8 +40,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </form>
-                            <p class="mt-3">By logging in, you agree to our <a href="{{ url('/terms') }}" target="_blank">Terms and Conditions</a>
-                            </a>.</p>
+                            <p class="mt-3">By logging in, you agree to our <a href="{{ url('/terms') }}" target="_blank">Terms and Conditions</a>.</p>
                         </div>
                     </div>
                 </div>

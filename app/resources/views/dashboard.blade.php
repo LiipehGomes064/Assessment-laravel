@@ -3,6 +3,7 @@
 @section('content')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('dashboard.css')}}">
 
 <main class="container my-5">
     <h2 class="mb-4">User List</h2>
@@ -10,7 +11,10 @@
         <thead>
             <tr>
                 <th>ID </th>
-                <th>First Name</th>
+                <th>First Name</th> 
+
+
+                
                 <th>Last Name</th>
                 <th>Age</th>
                 <th>Email</th>
@@ -35,6 +39,7 @@
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->address }}</td>
                     <td>{{ $user->professional_summary }}</td>
+    
 
                     @if (Auth::check() && Auth::user()->usertype == 1)
                         <td>

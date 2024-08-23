@@ -14,45 +14,42 @@ use App\Http\Controllers\EventsController;
 
 //events page
 Route::get('/events', [EventsController::class, 'index'])->name('events');
-Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit');
-Route::put('/events/{event}', [EventsController::class, 'update'])->name('events.update');
-Route::delete('/events/{event}', [EventsController::class, 'destroy'])->name('events.destroy');
-Route::get('/events/create', [EventsController::class, 'create'])->name('events.create');
-Route::post('/events', [EventsController::class, 'store'])->name('events.store');
+Route::middleware('auth:sanctum')->get('/events/{event}/edit', [EventsController::class, 'edit'])->middleware('admin')->name('events.edit');
+Route::put('/events/{event}', [EventsController::class, 'update'])->middleware('admin')->name('events.update');
+Route::delete('/events/{event}', [EventsController::class, 'destroy'])->middleware('admin')->name('events.destroy');
+Route::get('/events/create', [EventsController::class, 'create'])->middleware('admin')->name('events.create');
+Route::post('/events', [EventsController::class, 'store'])->middleware('admin')->name('events.store');
 
 
-//Pagina de ABout Us
+//About us Page
 Route::get('/aboutus',[AboutusController::class,'index'])->name('aboutus');
 
-// Página de dashboard
+// Dashboard page
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
-// Página de login
+// Login Page
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-// Página de registro
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
 
 //User Info Page
-Route::get('{user}/userinfo/',[UserinfoController::class,'index'])->name('userinfo');
+Route::get('{user}/userinfo/',[UserinfoController::class,'index'])->middleware('admin')->name('userinfo');
 
 // Logout
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Rotas de usuários
-Route::get('/users/create', [UserController::class, 'showCreateForm'])->name('users.create.form');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
+// User Routes
+Route::get('/users/create', [UserController::class, 'showCreateForm'])->middleware('admin')->name('users.create.form');
+Route::post('/users', [UserController::class, 'store'])->middleware('admin')->name('users.store');
 
-// Rota de edição de usuário
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+// Edit Users
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('admin')->name('users.edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->middleware('admin')->name('users.update');
 
-// Exclusão de usuário
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+// Destroy users
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('admin')->name('users.destroy');
 
-//Termos e condicoes
+//Terms and conditions
 Route::get('/terms',function(){
     return view('terms');
 });
