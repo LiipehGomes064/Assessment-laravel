@@ -2,14 +2,15 @@
 
 @section('content')
 @if (Auth::check() && Auth::user()->usertype == 1)
-<div class="container">
+<div class="container mb-4">
     <a href="{{ route('events.create') }}" class="btn btn-primary">Create a new event</a>
 </div>
 @endif
+
 <div class="container mt-5">
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach ($events as $event)
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <img src="{{ $event->event_image }}" class="card-img-top" alt="Imagem do Evento">
                     <div class="card-body">
@@ -31,4 +32,3 @@
     </div>
 </div>
 @endsection
-

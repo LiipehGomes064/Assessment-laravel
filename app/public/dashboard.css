@@ -8,8 +8,16 @@ body {
 main {
     flex: 1;
 }
-footer {
+/* footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+} */
+
+.line{
+    height: 30px;
+}   
+
+.container{
+    flex: 1;
 }

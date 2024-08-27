@@ -6,6 +6,14 @@
     <title>Login</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('login.css')}}">
+    <style>
+        .btn {
+            width: 100%;
+        }
+        .form-check-label {
+            margin-left: 0.3em;
+        }
+    </style>
 </head>
 <body>
     <div class="bg">
@@ -38,9 +46,12 @@
                                     <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">Remember Me</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="terms" name="terms">
+                                    <label class="form-check-label" for="terms">I agree to the <a href="{{ url('/terms') }}" target="_blank">Terms and Conditions</a></label>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="loginButton" disabled>Login</button>
                             </form>
-                            <p class="mt-3">By logging in, you agree to our <a href="{{ url('/terms') }}" target="_blank">Terms and Conditions</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -50,5 +61,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{asset('login.js')}}"></script>
 </body>
 </html>

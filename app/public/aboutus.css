@@ -6,8 +6,19 @@ main{
     display: flex;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+
+    .card-hover {
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-10px);
+        background-color: #007bff;
+        color: white; 
+    }
+    
+    
+    .card-hover:hover .card-title,
+    .card-hover:hover .card-text {
+        color: white;
+    }
