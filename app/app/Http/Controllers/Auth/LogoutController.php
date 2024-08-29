@@ -11,14 +11,13 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        $user = Auth::user();
+        $user = $request -> user();
     
         if ($user) {
-            // Revogar todos os tokens do usuário
+
             $user->tokens()->delete();
         } else {
-            // Se o usuário não estiver autenticado
-            return redirect('/login')->withErrors(['message' => 'Usuário não autenticado']);
+            return redirect('/login')->withErrors(['message' => 'User not authenticated']);
         }
 
         
