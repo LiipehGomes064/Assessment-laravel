@@ -11,7 +11,7 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        $user = $request -> user();
+        $user = $request -> user(); // changed to use the token authentication 
     
         if ($user) {
 

@@ -1,29 +1,31 @@
 <?php 
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        $remember = $request->has('remember');
-        if (Auth::attempt($credentials, $remember)) {
-            $user = Auth::user();
-            $token = $user->createToken('meu-token-secreto')->plainTextToken;
-            return redirect()->intended('dashboard')->with('token', $token);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['error' => 'As credenciais fornecidas não correspondem aos nossos registros.'], 401);
         }
-        return back()->withErrors([
-            'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
-        ])->withInput($request->only('email', 'remember'));
+
+        $token = $user->createToken('meu-token-secreto')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
+        ]);
     }
 }
